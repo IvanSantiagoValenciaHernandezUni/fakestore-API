@@ -1,79 +1,84 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Filtro from '../Filtro';
 
 function Lista() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+  const [productos, setProductos] = useState([]);
   const [tipoSeleccionado, setTipoSeleccionado] = useState('All');
   const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
-    const obtenerDatos = async () => {
+    const obtenerProductos = async () => {
       try {
-        let res;
         if (tipoSeleccionado === 'All') {
-          res = await fetch(`https://api.escuelajs.co/api/v1/products?limit=50`);
+          const res = await fetch(`https://api.escuelajs.co/api/v1/products`);
+          const data = await res.json();
+          setProductos(data);
         } else {
-          res = await fetch(`https://api.escuelajs.co/api/v1/categories/${tipoSeleccionado}/products`);
+          const resCategorias = await fetch(`https://api.escuelajs.co/api/v1/categories`);
+          const categorias = await resCategorias.json();
+          const categoriaElegida = categorias.find(cat => cat.name.toLowerCase() === tipoSeleccionado.toLowerCase());
+
+          if (categoriaElegida) {
+            const resFiltrado = await fetch(`https://api.escuelajs.co/api/v1/categories/${categoriaElegida.id}/products`);
+            const dataFiltrada = await resFiltrado.json();
+            setProductos(dataFiltrada);
+          } else {
+            setProductos([]);
+          }
         }
-        const json = await res.json();
-        setData(json);
       } catch (error) {
-        console.error('Error al obtener datos:', error);
-        setData([]);
+        console.error('Error al obtener productos:', error);
       }
     };
 
-    obtenerDatos();
+    obtenerProductos();
   }, [tipoSeleccionado]);
 
   const handleTipoChange = (tipo) => {
     setTipoSeleccionado(tipo);
   };
 
-  let resultados = data;
-  if (busqueda.length >= 1) {
-    resultados = data.filter(producto => {
-      const titulo = producto.title.toLowerCase();
-      const categoria = producto.category?.name.toLowerCase();
-      const id = producto.id.toString();
-      const termino = busqueda.toLowerCase();
 
-      return (
-        titulo.includes(termino) ||
-        categoria.includes(termino) ||
-        id.includes(termino)
-      );
-    });
+  let resultados = productos;
+
+  if (busqueda.length >= 3 && isNaN(busqueda)) {
+    resultados = productos.filter(producto =>
+      producto.title.toLowerCase().includes(busqueda.toLowerCase())
+    );
+  }
+
+  if (!isNaN(busqueda)) {
+    resultados = productos.filter(producto =>
+      producto.id.toString().includes(busqueda)
+    );
   }
 
   return (
     <>
       <input
         type="text"
-        placeholder="Buscar Producto"
+        placeholder="Buscar productos"
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
         className="c-buscador"
       />
-
       <Filtro onTipoChange={handleTipoChange} />
-
-      <section className='c-lista'>
-        {resultados.map((producto, index) => (
+      <section className="c-lista">
+        {resultados.map((producto) => (
           <div
-            className='c-lista-pokemon'
+            className="c-lista-pokemon"
             onClick={() => navigate(`/Productos/${producto.id}`)}
-            key={index}
+            key={producto.id}
           >
             <img
-              src={producto.images[0]}
+              src={producto.images?.[0]}
               alt={producto.title}
-              width='auto'
-              height='60'
-              loading='lazy'
+              width="auto"
+              height="60"
+              loading="lazy"
             />
             <p>{producto.title}</p>
           </div>
