@@ -41,7 +41,6 @@ function Lista() {
     setTipoSeleccionado(tipo);
   };
 
-
   let resultados = productos;
 
   if (busqueda.length >= 3 && isNaN(busqueda)) {
@@ -66,23 +65,32 @@ function Lista() {
         className="c-buscador"
       />
       <Filtro onTipoChange={handleTipoChange} />
+      
       <section className="c-lista">
-        {resultados.map((producto) => (
-          <div
-            className="c-lista-pokemon"
-            onClick={() => navigate(`/Productos/${producto.id}`)}
-            key={producto.id}
-          >
-            <img
-              src={producto.images?.[0]}
-              alt={producto.title}
-              width="auto"
-              height="60"
-              loading="lazy"
-            />
-            <p>{producto.title}</p>
-          </div>
-        ))}
+        {resultados.length > 0 ? (
+          resultados.map((producto) => (
+            <div
+              className="c-lista-pokemon"
+              onClick={() => navigate(`/Productos/${producto.id}`)}
+              key={producto.id}
+            >
+              <img
+                src={producto.images?.[0]}
+                alt={producto.title}
+                width="auto"
+                height="60"
+                loading="lazy"
+              />
+              <p>{producto.title}</p>
+            </div>
+          ))
+        ) : (
+          tipoSeleccionado.toLowerCase() === "furniture" && (
+            <p style={{ textAlign: 'center', padding: '20px' }}>
+              No hay productos disponibles.
+            </p>
+          )
+        )}
       </section>
     </>
   );

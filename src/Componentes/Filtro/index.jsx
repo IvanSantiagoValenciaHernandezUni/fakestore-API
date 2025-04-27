@@ -1,8 +1,8 @@
 function Filtro({ onTipoChange }) {
   const tipos = [
     "All",
-    "change", "nuevo", "Furniture", "Shoes", "Miscellaneous", "un nuevo nombre", "Nueva Categoria",
-    "Royal Items","category_B", "string", "New category"
+    "Clothes", "Electronics", "Furniture", "Shoes", "Miscellaneous", "un nuevo nombre", 
+    "Nueva Categoria","category_B", "New category"
   ];
 
   return (
