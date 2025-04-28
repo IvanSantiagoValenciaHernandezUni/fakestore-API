@@ -7,6 +7,7 @@ import Favoritos from './Componentes/Favoritos'
 import Lista from './Componentes/Lista'
 import Productos from './Componentes/Productos'
 import Usuarios from './Componentes/Usuarios'
+import Elementos from './Componentes/Elementos'
 import Menu from './Componentes/Menu'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Favoritos" element={<Favoritos />} />
         <Route path="/Lista" element={<Lista />} />
         <Route path="/Usuarios" element={<Usuarios />} />
+        <Route path="/Elementos" element={<Elementos />} />
         <Route path="/Productos/:name" element={<Productos />} />
       </Routes>
     </Router>
