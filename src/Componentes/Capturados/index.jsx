@@ -5,7 +5,7 @@ function Capturados() {
 
   return (
     <>
-    <h1>Capturados</h1>
+    <h1>Más Buscados</h1>
     </>
   )
 }
