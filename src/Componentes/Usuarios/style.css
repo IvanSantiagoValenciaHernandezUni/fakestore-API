@@ -1,0 +1,39 @@
+.perfil-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.perfil-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3c3c3c;
+}
+
+.perfil-info {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.perfil-info strong {
+  color: #222;
+}
+
+.perfil-container button {
+  margin-top: 20px;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.perfil-container button:hover {
+  background-color: #c62828;
+}

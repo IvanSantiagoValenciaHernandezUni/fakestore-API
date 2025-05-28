@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../Contexto/contexto'; // Importa contexto
 import './style.css';
 import Filtro from '../Filtro';
 
 function Lista() {
   const navigate = useNavigate();
+  const { setBuscadosRecientemente } = useContext(AppContext);
+
   const [productos, setProductos] = useState([]);
   const [tipoSeleccionado, setTipoSeleccionado] = useState('All');
   const [busqueda, setBusqueda] = useState('');
@@ -56,44 +59,44 @@ function Lista() {
   }
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder="Buscar productos"
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        className="c-buscador"
-      />
-      <Filtro onTipoChange={handleTipoChange} />
-      
-      <section className="c-lista">
-        {resultados.length > 0 ? (
-          resultados.map((producto) => (
-            <div
-              className="c-lista-pokemon"
-              onClick={() => navigate(`/Productos/${producto.id}`)}
-              key={producto.id}
-            >
-              <img
-                src={producto.images?.[0]}
-                alt={producto.title}
-                width="auto"
-                height="60"
-                loading="lazy"
-              />
-              <p>{producto.title}</p>
-            </div>
-          ))
-        ) : (
-          tipoSeleccionado.toLowerCase() === "furniture" && (
-            <p style={{ textAlign: 'center', padding: '20px' }}>
-              No hay productos disponibles.
-            </p>
-          )
-        )}
-      </section>
-    </>
-  );
+  <>
+    <input
+      type="text"
+      placeholder="Buscar productos"
+      value={busqueda}
+      onChange={(e) => setBusqueda(e.target.value)}
+      className="c-buscador"
+    />
+    <Filtro onTipoChange={handleTipoChange} />
+    
+    <section className="c-lista">
+      {resultados.length > 0 ? (
+        resultados.map((producto) => (
+          <div
+            className="c-lista-pokemon"
+            onClick={() => navigate(`/productos/${producto.id}`)}  // <-- aquí cambiamos Productos a productos (minúscula)
+            key={producto.id}
+          >
+            <img
+              src={producto.images?.[0]}
+              alt={producto.title}
+              width="auto"
+              height="60"
+              loading="lazy"
+            />
+            <p>{producto.title}</p>
+          </div>
+        ))
+      ) : (
+        tipoSeleccionado.toLowerCase() === "furniture" && (
+          <p style={{ textAlign: 'center', padding: '20px' }}>
+            No hay productos disponibles.
+          </p>
+        )
+      )}
+    </section>
+  </>
+);
 }
 
 export default Lista;
