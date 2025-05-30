@@ -42,8 +42,8 @@
   color: white;
   transition: background-color 0.3s ease;
   user-select: none;
-  margin-bottom: 20px; /* Da espacio para que no quede pegado al menú */
-  position: relative; /* Sin z-index alto */
+  margin-bottom: 20px;
+  position: relative; 
 }
 
 .c-producto button:hover {

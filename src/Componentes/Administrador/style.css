@@ -20,15 +20,15 @@
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  background-color: #1a1a1a; /* fondo oscuro */
-  color: #fff; /* texto blanco */
+  background-color: #1a1a1a; 
+  color: #fff; 
   border-radius: 8px;
   overflow: hidden;
 }
 
 /* Encabezados */
 .admin-table th {
-  background-color: #111; /* un poco más oscuro que el body de la tabla */
+  background-color: #111;
   color: #fff;
   font-weight: 600;
   padding: 12px 15px;
@@ -40,7 +40,7 @@
   padding: 12px 15px;
   border-bottom: 1px solid #333;
   vertical-align: middle;
-  color: #ddd; /* texto un poco más claro para mejor legibilidad */
+  color: #ddd; 
 }
 
 /* Inputs dentro de la tabla */

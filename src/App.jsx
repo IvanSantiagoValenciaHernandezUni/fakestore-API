@@ -27,7 +27,6 @@ function App() {
     }
     verificarSesion();
     
-    // Escucha cambios en la sesión
     supabase.auth.onAuthStateChange((_event, session) => {
       setUsuario(session?.user || null);
     });

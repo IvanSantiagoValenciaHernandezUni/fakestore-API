@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../Contexto/contexto'; // Importa contexto
+import { AppContext } from '../../Contexto/contexto';
 import './style.css';
 import Filtro from '../Filtro';
 
@@ -74,7 +74,7 @@ function Lista() {
         resultados.map((producto) => (
           <div
             className="c-lista-pokemon"
-            onClick={() => navigate(`/productos/${producto.id}`)}  // <-- aquí cambiamos Productos a productos (minúscula)
+            onClick={() => navigate(`/productos/${producto.id}`)}
             key={producto.id}
           >
             <img
